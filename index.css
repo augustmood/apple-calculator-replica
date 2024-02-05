@@ -1,0 +1,93 @@
+:root {
+    --color-primary: #e6e6e6;
+    --color-result-background: #222222;
+    --color-button-numeric: #595959;
+    --color-button-operation-primary: #f7a239;
+    --color-button-operation-secondary: #383838;
+    --color-button-operation-primary-clicked: #c5802b;
+    --color-button-operation-secondary-clicked: #595959;
+    --color-button-numeric-clicked: #9b9b9b;
+    --color-button-primary-border: #222222;
+    --width-button: 24.75%;
+    --width-button-double: 49.75%;
+}
+
+body {
+    min-height: 630px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;  
+    width: 460px;
+    background-color: var(--color-result-background);
+}
+
+.results {
+    font-family: monospace;
+    padding: 50px 10px 10px 0px;
+    font-size: 70px;
+    color: var(--color-primary);
+    background-color: var(--color-result-background);
+    text-align: right;
+}
+
+.buttons-row {
+    display: flex;
+    margin-bottom: 0.25%;
+    justify-content: space-between;
+}
+
+.buttons-row:last-of-type {
+    margin-bottom: 0;
+}
+
+.button {
+    font-size: 30px;
+    background-color: var(--color-button-numeric);
+    color: var(--color-primary);
+    width: var(--width-button);
+    height: 95px;
+    border: none;
+    user-select: none;
+}
+
+.primary-op {
+    font-size: 35px;
+    background-color: var(--color-button-operation-primary);
+}
+
+.secondary-op {
+    background-color: var(--color-button-operation-secondary);
+}
+
+.secondary-op--clicked {
+    background-color: var(--color-button-operation-secondary-clicked);
+}
+
+.primary-op--clicked {
+    background-color: var(--color-button-operation-primary-clicked);
+}
+
+.primary-op--selected {
+    border: var(--color-button-primary-border) 4px solid;
+    border-right: none;
+}
+
+.numeric--clicked {
+    background-color: var(--color-button-numeric-clicked);
+}
+
+.double {
+    width: var(--width-button-double);
+}
