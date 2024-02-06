@@ -106,6 +106,9 @@ function action(inputVal) {
             newInput = false;
         }
     } else if (isFinite(inputVal)) {
+        console.log("line_109", buffer);
+        console.log("line_110", isEq);
+        console.log("line_111", newInput)
         if (!newInput & (tempNum != 0 || tempNum.toString().includes("."))) {
             tempNum += inputVal;
         } else {
@@ -125,38 +128,52 @@ function action(inputVal) {
         buffer = [Number(tempNum)];
         isEq = true;
         newInput = true;
+        console.log("line 131", buffer);
     } else {
+        curr_op = opMapping(inputVal); 
+        console.log("line 134", newInput);
+        console.log("line 135", buffer);
+        console.log("line 136", isEq);
+
         if (newInput) {
             // If isEq is true, we will only have one element in buffer:
             if (!isEq) {
                 buffer.pop();
                 calcOrder.pop();
+            } else {
+                buffer = [];
+                buffer.push(Number(tempNum));
+                console.log("line 140", buffer);
             }
         } else {
             // Push zero into buffer, if the calculator is just initiated.
+            if (isEq) {
+                buffer.pop();
+            }
             buffer.push(Number(tempNum));
         }
         // Push the operation symbol into buffer
-        curr_op = opMapping(inputVal); 
         // console.log(calcOrder);
-        if (calcOrder.length == 2) {
-            if (calcOrder.toString() !== '-1,1') {
-                tempNum = calcBuffer(buffer);
-                buffer = [Number(tempNum)];
-                calcOrder = calcOrder.slice(1);
-            }
-        } 
-        if (calcOrder.length == 3) {
-            if (calcOrder.toString() === '-1,1,-1') {
-                tempNum = calcBuffer(buffer);
-                buffer = [Number(tempNum)];
-                calcOrder = calcOrder.slice(2);
-            } else if (calcOrder.toString() === '-1,1,1') {
-                tempBuffer = buffer.slice(-3);
-                // console.log(tempBuffer);
-                tempNum = calcBuffer(tempBuffer);
-                buffer = buffer.slice(0, -3).concat([Number(tempNum)]);
-                calcOrder.splice(2, 1);
+        if (buffer.length >= 3) {
+            if (calcOrder.length == 2) {
+                if (calcOrder.toString() !== '-1,1') {
+                    tempNum = calcBuffer(buffer);
+                    buffer = [Number(tempNum)];
+                    calcOrder = calcOrder.slice(1);
+                }
+            } 
+            if (calcOrder.length == 3) {
+                if (calcOrder.toString() === '-1,1,-1') {
+                    tempNum = calcBuffer(buffer);
+                    buffer = [Number(tempNum)];
+                    calcOrder = calcOrder.slice(2);
+                } else if (calcOrder.toString() === '-1,1,1') {
+                    tempBuffer = buffer.slice(-3);
+                    // console.log(tempBuffer);
+                    tempNum = calcBuffer(tempBuffer);
+                    buffer = buffer.slice(0, -3).concat([Number(tempNum)]);
+                    calcOrder.splice(2, 1);
+                }
             }
         }
         buffer.push(curr_op);
